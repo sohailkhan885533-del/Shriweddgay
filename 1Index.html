@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shri Krishna & Shri Gay | Wedding Invitation</title>
+    <!-- Google Fonts for Luxury Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* --- GLOBAL & VARIABLES --- */
         :root {
             --gold-primary: #D4AF37;
             --gold-light: #F3E5AB;
+            --gold-dark: #AA771C;
             --ivory: #FFFBF0;
             --blush: #FDE8E9;
             --text-dark: #4A4A4A;
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.15);
+            --velvet-dark: #3A0007;
+            --velvet-light: #5C0612;
         }
 
         * {
@@ -82,77 +86,127 @@
             height: 100vh;
             z-index: 9999;
             display: flex;
-            perspective: 1500px;
+            perspective: 2000px;
             transition: visibility 1.5s;
+            overflow: hidden;
         }
 
         .gate {
             width: 50%;
             height: 100%;
-            background: linear-gradient(135deg, #2c1a04 0%, #4a2f0f 100%);
-            border: 4px solid var(--gold-primary);
+            background: linear-gradient(135deg, var(--velvet-dark) 0%, var(--velvet-light) 50%, var(--velvet-dark) 100%);
             position: relative;
-            transition: transform 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+            transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex;
             align-items: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+            padding: 20px;
         }
 
         .gate-left {
             transform-origin: left center;
             justify-content: flex-end;
-            border-right: 2px solid var(--gold-primary);
+            border-right: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .gate-right {
             transform-origin: right center;
             justify-content: flex-start;
-            border-left: 2px solid var(--gold-primary);
+            border-left: 1px solid rgba(255, 215, 0, 0.3);
         }
 
-        /* Royal Indian Motif watermark simulation on gates */
+        /* Ornate Ornaments & Intricate Frame Borders */
+        .gate-frame {
+            position: absolute;
+            top: 25px;
+            bottom: 25px;
+            border: 2px solid var(--gold-primary);
+            width: calc(100% - 50px);
+            pointer-events: none;
+        }
+
+        .gate-left .gate-frame { right: 25px; left: auto; border-right: 1px solid var(--gold-primary); }
+        .gate-right .gate-frame { left: 25px; right: auto; border-left: 1px solid var(--gold-primary); }
+
+        .gate-frame::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px dashed var(--gold-light);
+            opacity: 0.6;
+        }
+
+        /* Structural Corner Accents */
+        .gate-corner {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--gold-primary);
+            pointer-events: none;
+        }
+        .gate-corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+        .gate-corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+        .gate-corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+        .gate-corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+        /* Traditional Pattern Watermark Background */
         .gate::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(212, 175, 55, 0.03) 21%, transparent 21%),
-                        radial-gradient(circle, transparent 20%, rgba(212, 175, 55, 0.03) 21%, transparent 21%);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
+            background-image: radial-gradient(circle, transparent 20%, rgba(212, 175, 55, 0.025) 21%, transparent 21%),
+                              radial-gradient(circle, transparent 20%, rgba(212, 175, 55, 0.025) 21%, transparent 21%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
             pointer-events: none;
         }
 
+        /* Luxury 3D Wax Seal Button */
         .wax-seal {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1);
             z-index: 10000;
-            width: 160px;
-            height: 160px;
-            background: radial-gradient(circle, #AA771C 0%, #BF953F 60%, #8A5A00 100%);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #BF953F 0%, #AA771C 40%, #7A530C 80%, #4A3004 100%);
             border-radius: 50%;
-            border: 3px double var(--gold-light);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.3);
+            border: 4px double var(--gold-light);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), 
+                        inset 0 0 20px rgba(0,0,0,0.4), 
+                        0 0 0 8px rgba(212, 175, 55, 0.15);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: all 0.5s ease-in-out;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+        }
+
+        .wax-seal::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid var(--gold-light);
+            border-radius: 50%;
+            opacity: 0.4;
         }
 
         .wax-seal:hover {
             transform: translate(-50%, -50%) scale(1.08);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 
+                        inset 0 0 15px rgba(0,0,0,0.2), 
+                        0 0 25px rgba(212, 175, 55, 0.4);
         }
 
         .wax-seal .monogram-initials {
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: white;
+            font-size: 1.8rem;
+            color: #FFFBF0;
             font-weight: 700;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+            text-shadow: 2px 3px 4px rgba(0,0,0,0.6);
         }
 
         .wax-seal .open-text {
@@ -160,23 +214,26 @@
             font-size: 0.65rem;
             color: var(--gold-light);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 5px;
+            letter-spacing: 3px;
+            margin-top: 6px;
             font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Opening States */
+        /* Opening Animation Mechanics */
         #wedding-gatefold.is-opened {
             visibility: hidden;
             pointer-events: none;
         }
 
         #wedding-gatefold.is-opened .gate-left {
-            transform: rotateY(-120deg);
+            transform: rotateY(-130deg);
+            box-shadow: 25px 0 50px rgba(0,0,0,0.5);
         }
 
         #wedding-gatefold.is-opened .gate-right {
-            transform: rotateY(120deg);
+            transform: rotateY(130deg);
+            box-shadow: -25px 0 50px rgba(0,0,0,0.5);
         }
 
         #wedding-gatefold.is-opened .wax-seal {
@@ -451,18 +508,29 @@
 </head>
 <body class="lock-scroll">
 
+    <!-- UPGRADED ENHANCED GATEFOLD STRUCTURE -->
     <div id="wedding-gatefold" role="dialog" aria-modal="true" aria-label="Wedding Invitation Envelope Cover">
-        <div class="gate gate-left" aria-hidden="true"></div>
+        <div class="gate gate-left" aria-hidden="true">
+            <div class="gate-frame"></div>
+            <div class="gate-corner gate-corner-tl"></div>
+            <div class="gate-corner gate-corner-bl"></div>
+        </div>
         <button class="wax-seal" onclick="openInvitation()" aria-label="Open the wedding invitation card">
             <span class="monogram-initials">K & G</span>
             <span class="open-text">Open</span>
         </button>
-        <div class="gate gate-right" aria-hidden="true"></div>
+        <div class="gate gate-right" aria-hidden="true">
+            <div class="gate-frame"></div>
+            <div class="gate-corner gate-corner-tr"></div>
+            <div class="gate-corner gate-corner-br"></div>
+        </div>
     </div>
 
+    <!-- Background Animation -->
     <div id="particles" aria-hidden="true"></div>
 
     <main>
+        <!-- HERO / LANDING SECTION -->
         <section class="hero" aria-labelledby="hero-title">
             <div class="monogram gold-text cursive" aria-hidden="true">K & G</div>
             <h1 id="hero-title" class="couple-names gold-text">
@@ -495,6 +563,7 @@
             <a href="#events" class="btn" aria-label="Scroll down to view wedding events">Explore Itinerary</a>
         </section>
 
+        <!-- EVENTS SECTION -->
         <section id="events" class="fade-in-section" aria-labelledby="events-title">
             <h2 id="events-title" class="section-title">Wedding Itinerary</h2>
             <div class="events-grid">
@@ -525,48 +594,6 @@
             </div>
         </section>
 
+        <!-- VENUE SECTION -->
         <section id="venue" class="fade-in-section" aria-labelledby="venue-title">
-            <h2 id="venue-title" class="section-title">The Venue</h2>
-            <div class="glass-card venue-container">
-                <div class="venue-details">
-                    <h3 class="gold-text">The Grand Palace</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 500;">Navi Mumbai, Maharashtra, India</p>
-                    <p style="margin-bottom: 2rem; color: #555;">Experience the royal ambiance as we celebrate our love in the beautiful heart of Navi Mumbai.</p>
-                    <a href="https://maps.google.com/?q=Navi+Mumbai+The+Grand+Palace" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 12px 30px; font-size: 1rem;">Navigate via Maps</a>
-                </div>
-                <div class="map-container">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=Navi%20Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                        title="Interactive Map showing the wedding location in Navi Mumbai" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="rsvp" class="fade-in-section" aria-labelledby="rsvp-title">
-            <h2 id="rsvp-title" class="section-title">RSVP</h2>
-            <div class="glass-card" style="max-width: 700px; margin: 0 auto;">
-                <p style="text-align: center; margin-bottom: 2.5rem; font-size: 1.1rem;">Please let us know if you can join us to celebrate our special day.</p>
-                <form class="rsvp-form" onsubmit="submitRSVP(event)" aria-label="Wedding RSVP Form">
-                    <div class="input-group">
-                        <label for="fullName" class="sr-only">Full Name</label>
-                        <input type="text" id="fullName" placeholder="Full Name" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="contactNumber" class="sr-only">Contact Number</label>
-                        <input type="tel" id="contactNumber" placeholder="Contact Number" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="attendees" class="sr-only">Number of Attendees</label>
-                        <select id="attendees" required>
-                            <option value="" disabled selected>Number of Attendees</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4+">4+</option>
-                        </select>
-                    </div>
-                    <div class="inpu
+            <h
