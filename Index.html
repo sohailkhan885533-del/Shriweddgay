@@ -1,17 +1,3 @@
-I have thoroughly reviewed the code. While the original version was structurally sound and visually beautiful, I found a few technical areas that needed tightening up to ensure a truly flawless, production-ready experience.
-
-Here are the specific fixes and improvements I applied to this updated version:
-
-1. **Fixed the Broken Map Iframe:** The previous map URLs were generic placeholders (`http://googleusercontent.com/maps.google.com/...`) which would result in a broken frame on a live site. I have replaced this with a valid, working Google Maps embed link pointing to Navi Mumbai, along with a working external map link for the navigation button.
-2. **Enhanced Accessibility (a11y):** I added `aria-label` attributes to all the RSVP form inputs and a `title` attribute to the map iframe. This ensures the site is readable by screen readers, making it fully accessible to all guests.
-3. **Improved Mobile Text Wrapping:** I wrapped the bride and groom's names in a flex container so that the heart icon and names scale and wrap much more gracefully on very narrow mobile screens.
-4. **Form Submit Button Fix:** Added `disabled` state to the RSVP button upon submission to prevent impatient guests from clicking it multiple times and triggering duplicate animations or submissions.
-
-Here is the fully optimized and corrected code.
-
-### **The Updated Code: index.html**
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -403,10 +389,10 @@ Here is the fully optimized and corrected code.
                 <h3 class="gold-text" style="font-size: 2rem; margin-bottom: 1rem;">The Grand Palace</h3>
                 <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Navi Mumbai, Maharashtra, India</p>
                 <p style="margin-bottom: 2rem; color: #666;">Experience the royal ambiance as we celebrate our love in the heart of Navi Mumbai.</p>
-                <a href="https://maps.google.com/?q=Navi+Mumbai" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 10px 25px; font-size: 1rem; display: inline-block;">Navigate via Maps</a>
+                <a href="https://www.google.com/maps/place/Navi+Mumbai,+Maharashtra/" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 10px 25px; font-size: 1rem; display: inline-block;">Navigate via Maps</a>
             </div>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120638.06452285127!2d72.93424163972235!3d19.03082599723224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c3bb79ea3c09%3A0x59902ed2edc416f5!2sNavi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" title="Wedding Location Map in Navi Mumbai" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120653.12294597652!2d72.9442034!3d19.081258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sNavi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1717180000000!5m2!1sen!2sin" title="Wedding Location Map in Navi Mumbai" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -443,28 +429,28 @@ Here is the fully optimized and corrected code.
         // 1. Floating Petals Animation
         function createPetals() {
             const particleContainer = document.getElementById('particles');
-            const petalCount = 25; // Optimized for performance
+            if (!particleContainer) return; // Safety check
+            
+            const petalCount = 25; 
             
             for (let i = 0; i < petalCount; i++) {
                 let petal = document.createElement('div');
                 petal.classList.add('petal');
                 
-                // Randomize properties
-                let size = Math.random() * 10 + 10; // 10px to 20px
+                let size = Math.random() * 10 + 10; 
                 petal.style.width = size + 'px';
                 petal.style.height = size + 'px';
                 petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5s to 10s
+                petal.style.animationDuration = Math.random() * 5 + 5 + 's'; 
                 petal.style.animationDelay = Math.random() * 5 + 's';
                 
                 particleContainer.appendChild(petal);
             }
         }
         
-        // Ensure DOM is loaded before creating petals
         document.addEventListener('DOMContentLoaded', createPetals);
 
-        // 2. Countdown Timer (Set to a future date)
+        // 2. Countdown Timer
         const weddingDate = new Date("Nov 16, 2026 09:00:00").getTime();
 
         const timer = setInterval(function() {
@@ -476,7 +462,6 @@ Here is the fully optimized and corrected code.
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Add safe null checks in case elements aren't rendered
             const daysEl = document.getElementById("days");
             if (daysEl) {
                 daysEl.innerHTML = days < 10 ? '0' + days : days;
@@ -494,7 +479,7 @@ Here is the fully optimized and corrected code.
             }
         }, 1000);
 
-        // 3. Scroll Triggered Animations (Intersection Observer)
+        // 3. Scroll Triggered Animations
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -510,28 +495,27 @@ Here is the fully optimized and corrected code.
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach((section) => {
-            observer.observe(section);
+        // Allow DOM to load before observing
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-in-section').forEach((section) => {
+                observer.observe(section);
+            });
         });
 
-        // 4. RSVP Form Submission Mock
+        // 4. RSVP Form Submission
         function submitRSVP(event) {
             event.preventDefault();
             const form = event.target;
             const btn = form.querySelector('button');
             
-            // Prevent multiple clicks
             btn.innerHTML = "Sending...";
             btn.disabled = true;
             btn.style.opacity = "0.7";
             
-            // Simulate network request
             setTimeout(() => {
                 form.innerHTML = "<h3 class='gold-text' style='text-align: center; margin: 2rem 0;'>Thank you for your RSVP! We can't wait to see you.</h3>";
             }, 1500);
         }
     </script>
 </body>
-</html>
-
-```
+                </html>
